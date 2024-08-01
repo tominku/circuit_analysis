@@ -19,8 +19,6 @@ is_input_wave = False
 A = np.array([[L1/dt, -M/dt], [-M/dt, L2/dt]])
 print(A)
 
-#b = np.array([-(-L1*i1 + M*i2 + R1*dt*i1 - dt*v_g)/dt, -(-L2*i2 + M*i1 + R2*dt*i2)/dt])
-
 i = 0
 
 i1_list = []
@@ -29,12 +27,16 @@ v_g_list = []
 t_list = []
 i1 = 0
 i2 = 0
+t_on = 1
 for step in range(800): 
     t = dt*step   
-    v_g = v_g_mag
-    if is_input_wave:
-        freq = 1
-        v_g = v_g_mag*np.sin(2*np.pi*freq*t)
+    if t > t_on:
+        v_g = v_g_mag  
+        if is_input_wave:
+            freq = 1
+            v_g = v_g_mag*np.sin(2*np.pi*freq*(t-t_on))
+    else:
+        v_g = 0                  
     
     b = np.array([-(-L1*i1 + M*i2 + R1*dt*i1 - dt*v_g)/dt, -(-L2*i2 + M*i1 + R2*dt*i2)/dt])        
     i = LA.solve(A, b)
