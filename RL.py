@@ -5,8 +5,8 @@ L = 8
 v_g_mag = 5
 dt = 0.01
 
-#is_input_wave = True
-is_input_wave = False
+is_input_wave = True
+#is_input_wave = False
 
 i = 0
 
